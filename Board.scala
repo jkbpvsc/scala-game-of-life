@@ -1,5 +1,3 @@
-//package gol
-
 import scala.util.Random
 import scala.sys.process._
 
