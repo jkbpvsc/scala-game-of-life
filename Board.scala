@@ -1,13 +1,11 @@
-//package gol
-
 import scala.util.Random
 import scala.sys.process._
 
 object Board {
   private var boardMatrix: IndexedSeq[Cell] = _
   var width: Int = 20
-  var height: Int = 40
-  var fps = 30;
+  var height: Int = 20
+  var fps = 20;
   def init: Unit = {
     boardMatrix = for (x <- -width / 2 to width / 2; y <- -height / 2 to height / 2 if Random.nextBoolean()) yield Cell(y, x)
   }
@@ -21,7 +19,7 @@ object Board {
   def draw = {
     print("\033[H\033[2J")
     for (y <- -width to width ; x <- -height to height) {
-      var cell = if (isAlive(x, y)) s"o " else s". "
+      var cell = if (isAlive(x, y)) s"o " else s"  "
 
       if (x == height)
         cell = s"$cell \n"
@@ -38,7 +36,6 @@ object Board {
     else
       n == 2 || n == 3
   }
-
 
   def next(board: IndexedSeq[Cell]): IndexedSeq[Cell] = { for (cell <- board; n: Cell <- neighbours(cell)) yield n }.distinct filter survives
 
